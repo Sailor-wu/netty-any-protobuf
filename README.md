@@ -16,11 +16,11 @@ netty支持任意多个protoBuf协议编解码方案，易实行。
 * 编码时，每一个message都可以找到它唯一的messageId。
 
 # 关键在于messageId分配，需要保证以下几点：
-* messageId不可以重复
+* 不可以重复
 * 易扩展
 * 稳定(尽可能的保持之前的messageId)
 
-messageId主要通过工具为各个端生成，减少手动操作，手动操作过于繁琐，且可维护性太差。方式之间各有优缺点，后面详细说明。
+# messageId主要通过工具为各个端生成，减少手动操作，手动操作过于繁琐，且可维护性太差。方式之间各有优缺点，后面详细说明。
 * 计算message的hashcode，
 * 为每一个文件分配一个区间段，文件内的message按照顺序分配id。
 * 其他，暂未想到。应该也存在
@@ -31,4 +31,4 @@ messageId主要通过工具为各个端生成，减少手动操作，手动操�
 * app-core是核心包，是项目中其他模块依赖的对象。它持有messageId生成器生成的枚举类，并实现了编解码过程。并提供了一个example示例。
 * protobuf-generatedmessage 是存放protoBuf生成的java代码的。
 * protobuf-messageidgenerator 是工具module，遍历指定的proto文件，将文件内的message读取出来，并分配id，然后写入各自需要的文件中。
-(在这里app-core包中的Message是工具为java端生成的枚举文件，需要其它语言的文件，可以自己实现，后期我会写一个TypeScript的类文件)
+(在这里app-core包中的MessageEnum枚举文件是工具根据模板文件为java端生成的枚举文件，需要其它语言的文件，可以自己实现，后期我会写一个TypeScript的类文件)
