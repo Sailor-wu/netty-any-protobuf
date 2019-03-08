@@ -85,14 +85,15 @@ public class ExampleClient {
 
             // 每10次一个ping包
             if (index%10==0){
-                channel.writeAndFlush(PCSMessage.client_server_ping.newBuilder().build());
+                PCSMessage.client_server_ping pingMsg = PCSMessage.client_server_ping.newBuilder().build();
+                channel.writeAndFlush(pingMsg);
             }
 
             // 每5次发一个请求
             if (index%5==0){
-                PCSMessage.server_client_one_request.Builder builder= PCSMessage.server_client_one_request.newBuilder();
-                builder.setParam(index);
-                channel.writeAndFlush(builder.build());
+                PCSMessage.server_client_one_request msg= PCSMessage.server_client_one_request.newBuilder()
+                        .setParam(index).build();
+                channel.writeAndFlush(msg);
             }
         }
     }

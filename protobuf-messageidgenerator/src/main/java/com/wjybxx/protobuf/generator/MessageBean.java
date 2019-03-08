@@ -1,5 +1,8 @@
 package com.wjybxx.protobuf.generator;
 
+/**
+ * 一个简单的包装对象，用于建立messageName 和 messageId之间的约束
+ */
 public class MessageBean {
     /**
      * 消息名字

@@ -8,9 +8,9 @@ import java.util.Properties;
  * hash的方式生成messageId
  *
  * 优点：简单、稳定，可以安全的兼容旧版本(重要)。
- * 确定：可能出现hash冲突，需要将冲突的消息打印出来，进行更名。
+ * 确定：可能出现hash冲突，需要将冲突的消息打印出来，进行更名，总的来说冲突概率还是比较低的。
  */
-public class HashMessageIdGenerator extends AbstractMessageIdGenerator{
+public class HashMessageIdGenerator implements MessageIdGenerator{
 
     /**
      * 用于检测冲突
@@ -18,7 +18,7 @@ public class HashMessageIdGenerator extends AbstractMessageIdGenerator{
     private final HashMap<Integer,String> hashCode2messageName=new HashMap<>(1024);
 
     @Override
-    public void generateMessageId(Properties properties, ProtoMessageRepository messageRepository) throws IOException {
+    public void generateMessageId(Properties properties, MessageRepository messageRepository) throws IOException {
         for (ProtoFileInfo protoFileInfo:messageRepository.values()){
             for (MessageBean messageBean:protoFileInfo.getMessageBeanList()){
                 String messageName=messageBean.getMessageName();
@@ -33,7 +33,5 @@ public class HashMessageIdGenerator extends AbstractMessageIdGenerator{
                 messageBean.setMessageId(hashCode);
             }
         }
-        // 写java枚举文件
-        writeJavaMessageEnum(properties,messageRepository);
     }
 }

@@ -13,11 +13,15 @@ public class ProtoBufFileUtils {
      * @return
      * @throws IOException
      */
-    public static ProtoMessageRepository findAllMessage(Properties properties) throws IOException {
+    public static MessageRepository findAllMessage(Properties properties) throws IOException {
         String protoBufDir = properties.getProperty("protoBufDir");
         String[] protoFileNames=properties.getProperty("protoBufFiles").split(",");
-        ProtoMessageRepository repository=new ProtoMessageRepository();
+        MessageRepository repository=new MessageRepository();
         for (String fileName:protoFileNames){
+            // 额外的空格
+            if (fileName.trim().equals("")){
+                continue;
+            }
             repository.addProtoFileInfo(readOneFile(protoBufDir,fileName));
         }
         return repository;

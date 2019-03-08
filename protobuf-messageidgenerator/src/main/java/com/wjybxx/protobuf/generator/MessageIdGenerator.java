@@ -13,5 +13,5 @@ public interface MessageIdGenerator {
      * @param properties
      * @param messageRepository
      */
-    void generateMessageId(Properties properties, ProtoMessageRepository messageRepository) throws IOException;
+    void generateMessageId(Properties properties, MessageRepository messageRepository) throws IOException;
 }

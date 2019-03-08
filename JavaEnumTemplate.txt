@@ -5,7 +5,7 @@ package com.wjybxx.protobuf;
  */
 public enum  MessageEnum {
 
-    //{content}
+    //content
 
     ;
     /**

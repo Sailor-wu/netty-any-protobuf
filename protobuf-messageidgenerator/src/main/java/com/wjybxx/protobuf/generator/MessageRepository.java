@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class ProtoMessageRepository {
+public class MessageRepository {
     /**
      * 所有的proto文件信息
      */

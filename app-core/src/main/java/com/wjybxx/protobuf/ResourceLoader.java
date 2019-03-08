@@ -6,6 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * 资源加载器
+ * 1.优先尝试从本地运行环境加载(debug优先)
+ * 2.其次尝试从jar包环境加载
+ */
 public class ResourceLoader {
 
     private ResourceLoader(){
@@ -35,22 +40,25 @@ public class ResourceLoader {
 
     /**
      * 以流形式加载一个文件
+     * 1.优先尝试从本地运行环境加载(debug优先)
+     * 2.其次尝试从jar包环境加载
      * @param fileName
      * @return
      * @throws IOException
      */
     public static InputStream loadAsStream(String fileName) throws IOException{
         try {
-            // 优先尝试从jar包环境加载
-            InputStream jarEnvironmentStream = findFromJarEnvironment(fileName);
-            if (null!=jarEnvironmentStream){
-                return jarEnvironmentStream;
+            // 优先尝试从本地运行环境加载(debug优先)
+            InputStream curEnvironmentStream = findFromCurEnvironment(fileName);
+
+            if (null!=curEnvironmentStream){
+                return curEnvironmentStream;
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        // 其次从本地环境加载
-        return findFromCurEnvironment(fileName);
+        // 其次尝试从jar包环境加载
+        return findFromJarEnvironment(fileName);
     }
 
     /**

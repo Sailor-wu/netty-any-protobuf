@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * 消息分发器，用于将消息分发到各个消息handler
  *
- * 要求所有的初始化工作都happens-before消息的处理工作，这是一种保证可见性的好方式
+ * 要求所有的初始化工作都happens-before消息的处理工作，这是一种保证安全性的好方式
  * {@link #registerHandler(Class, MessageHandler)} happens-before {@link #onMessage(MessageLite)}
  */
 public class MessageDispatcher {
