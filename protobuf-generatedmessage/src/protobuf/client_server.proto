@@ -1,0 +1,37 @@
+syntax = "proto3";
+package wjybxx;
+
+// optimize_for (file option): Can be set to SPEED, CODE_SIZE, or LITE_RUNTIME.
+option optimize_for=SPEED;
+
+// package属性是为了支持多语言的，在其他语言里，可能就是命名空间，因此建议定义清晰的java包名
+option java_package="com.wjybxx.generatedmessage";
+option java_outer_classname = "PCSMessage";
+
+
+// 消息的命名格式由团队习惯决定
+// 服务器发给客户端的第一个消息
+message server_client_first_message{
+	int32 uid=1;
+	string name=2;
+}
+
+//客户端发给服务器的ping包
+message client_server_ping{
+
+}
+
+// 服务器返回给客户端pong包
+message server_client_pong{
+}
+
+//客户端发给服务器的请求
+message server_client_one_request{
+	int32 param=1;
+}
+
+//服务器的请求处理结果
+message server_client_one_request_result{
+	int32 param=1;
+	string result=2;
+}

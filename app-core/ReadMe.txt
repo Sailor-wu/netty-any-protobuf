@@ -1,0 +1,9 @@
+该module是起名为core是指，所有的module都依赖该module。
+该module用于建立protoBuf与netty的联系。
+
+MessageEnum类是由生成器根据模板生成的。
+
+protoBuf文件夹下是比较有用的类，重要
+netty文件夹下是对应的codec实现，重要
+
+example文件夹下是展示的示例，handler中的处理都不是好的解决方案，只是为了展示handler的应用

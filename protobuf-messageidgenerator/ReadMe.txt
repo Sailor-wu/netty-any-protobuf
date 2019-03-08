@@ -1,0 +1,2 @@
+该module是完完全全的工具module，是独立的。
+用于为protoBuf的message分配messageId.

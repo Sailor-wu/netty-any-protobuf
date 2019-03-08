@@ -1,0 +1,18 @@
+syntax = "proto3";
+package wjybxx;
+
+// optimize_for (file option): Can be set to SPEED, CODE_SIZE, or LITE_RUNTIME.
+option optimize_for=SPEED;
+
+option java_package="com.wjybxx.generatedmessage";
+option java_outer_classname = "PSSMessage";
+
+message server_server_first_message{
+	int32 serverId=1;
+	string ip=2;
+}
+
+//服务器之间的ping包
+message server_server_ping{
+
+}

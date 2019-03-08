@@ -1,0 +1,18 @@
+syntax = "proto3";
+package wjybxx;
+
+// optimize_for (file option): Can be set to SPEED, CODE_SIZE, or LITE_RUNTIME.
+option optimize_for=SPEED;
+
+option java_package="com.wjybxx.generatedmessage";
+option java_outer_classname="PEnum";
+
+enum RoleType{
+    ROLE_TYPE_CODER=0;
+    ROLE_TYPE_MANAGER=1;
+}
+
+enum Gender{
+    MAN=0;
+    WOMAN=1;
+}
