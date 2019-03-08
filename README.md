@@ -1,12 +1,12 @@
 # netty-any-protobuf
 netty支持任意多个protoBuf协议编解码方案，易实行。
 
-自定义变长帧协议，其帧结构为：
+ 自定义变长帧协议，其帧结构为：
  * +--------------+------------+-----------------
  * | protoLength  |  messageId |  messageBytes  |
  * +--------------+------------+-----------------
 
-其中： 
+  其中： 
 * protoLength:int，占用4个字节，表示messageId + messageBytes的长度。
 * messageId: int，占用4个字节，消息体的唯一id。
 * messageBytes: bytes[],长度为(protoLength-4)，消息的真正内容。
@@ -20,7 +20,7 @@ netty支持任意多个protoBuf协议编解码方案，易实行。
 * 易扩展
 * 稳定(尽可能的保持之前的messageId)
 
-# messageId主要通过工具为各个端生成，减少手动操作，手动操作过于繁琐，且可维护性太差。方式之间各有优缺点，后面详细说明。
+  messageId主要通过工具为各个端生成，减少手动操作，手动操作过于繁琐，且可维护性太差。方式之间各有优缺点，后面详细说明。
 * 计算message的hashcode，
 * 为每一个文件分配一个区间段，文件内的message按照顺序分配id。
 * 其他，暂未想到。应该也存在
