@@ -52,19 +52,19 @@ public class ExampleClient {
         MessageDispatcher messageDispatcher =new MessageDispatcher();
 
         // 服务器发来的第一条消息
-        messageDispatcher.registerHandler(PCSMessage.server_client_first_message.class, message -> {
+        messageDispatcher.registerHandler(PCSMessage.server_client_first_message.class, (channel, message) -> {
             System.out.println("name="+message.getName() +", uid="+message.getUid());
             // 不使用toString()是为了展示注册的消息，在回调时不必再强转
 //            System.out.println(message.toString());
         });
 
         // pong包消息
-        messageDispatcher.registerHandler(PCSMessage.server_client_pong.class, message -> {
+        messageDispatcher.registerHandler(PCSMessage.server_client_pong.class, (channel, message) -> {
             System.out.println("rcv server pong.");
         });
 
         // request返回消息
-        messageDispatcher.registerHandler(PCSMessage.server_client_one_request_result.class, message -> {
+        messageDispatcher.registerHandler(PCSMessage.server_client_one_request_result.class, (channel, message) -> {
             // toString() 也是可读性很好的
             System.out.println(message.toString());
         });

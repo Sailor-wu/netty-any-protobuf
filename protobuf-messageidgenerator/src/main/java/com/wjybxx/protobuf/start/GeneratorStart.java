@@ -24,8 +24,8 @@ public class GeneratorStart {
         MessageRepository messageRepository = ProtoBufFileUtils.findAllMessage(properties);
 
         // 这里使用自己需要的策略(模式)
-//        SequenceMessageIdGenerator messageIdGenerator = new HashMessageIdGenerator();
-        SequenceMessageIdGenerator messageIdGenerator = new SequenceMessageIdGenerator();
+        MessageIdGenerator messageIdGenerator = new HashMessageIdGenerator();
+//        messageIdGenerator = new SequenceMessageIdGenerator();
         System.out.println("\nstart generateMessageId, strategy="+messageIdGenerator.getClass().getSimpleName());
         messageIdGenerator.generateMessageId(properties,messageRepository);
 
@@ -33,8 +33,8 @@ public class GeneratorStart {
         System.out.println("\nstart generate java enum.");
         new JavaEnumGenerator().generateCode(properties,messageRepository);
 
-        System.out.println("\nstart generate typescript enum.");
-        new TypeScriptEnumGenerator().generateCode(properties,messageRepository);
+//        System.out.println("\nstart generate typescript enum.");
+//        new TypeScriptEnumGenerator().generateCode(properties,messageRepository);
 
         System.out.println("\nsuccess.");
     }

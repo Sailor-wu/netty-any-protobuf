@@ -59,14 +59,19 @@ public class ExampleServer {
     private static MessageDispatcher newServerMessageDispatcher(){
         MessageDispatcher messageDispatcher =new MessageDispatcher();
 
-        messageDispatcher.registerHandler(PCSMessage.client_server_ping.class, message -> {
+        messageDispatcher.registerHandler(PCSMessage.client_server_ping.class, (channel, message) -> {
             System.out.println("rcv ping message.");
+            channel.writeAndFlush(PCSMessage.server_client_pong.newBuilder().build());
         });
 
-        messageDispatcher.registerHandler(PCSMessage.server_client_one_request.class, message -> {
+        messageDispatcher.registerHandler(PCSMessage.server_client_one_request.class, (channel, message) -> {
             // 同样的原因,不使用toString()是为了展示注册的消息，在回调时不必再强转
             System.out.println("param="+message.getParam());
 //            System.out.println(message.toString());
+            PCSMessage.server_client_one_request_result requestResult = PCSMessage.server_client_one_request_result.newBuilder()
+                    .setParam(message.getParam())
+                    .setResult("success").build();
+            channel.writeAndFlush(requestResult);
         });
 
         return messageDispatcher;

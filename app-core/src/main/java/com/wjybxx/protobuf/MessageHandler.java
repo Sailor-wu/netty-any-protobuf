@@ -1,6 +1,7 @@
 package com.wjybxx.protobuf;
 
 import com.google.protobuf.MessageLite;
+import io.netty.channel.Channel;
 
 /**
  * 定义消息处理的方法
@@ -9,9 +10,11 @@ import com.google.protobuf.MessageLite;
 public interface MessageHandler<T extends MessageLite> {
     /**
      * 当收到一个消息时
+     *
+     * @param channel
      * @param message
      * @throws Exception
      */
-    void onMessage(T message) throws Exception;
+    void onMessage(Channel channel, T message) throws Exception;
 
 }

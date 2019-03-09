@@ -5,13 +5,13 @@ package com.wjybxx.protobuf;
  */
 public enum  MessageEnum {
 
-    SERVER_CLIENT_FIRST_MESSAGE(10001,"com.wjybxx.generatedmessage","PCSMessage","server_client_first_message"),
-    CLIENT_SERVER_PING(10002,"com.wjybxx.generatedmessage","PCSMessage","client_server_ping"),
-    SERVER_CLIENT_PONG(10003,"com.wjybxx.generatedmessage","PCSMessage","server_client_pong"),
-    SERVER_CLIENT_ONE_REQUEST(10004,"com.wjybxx.generatedmessage","PCSMessage","server_client_one_request"),
-    SERVER_CLIENT_ONE_REQUEST_RESULT(10005,"com.wjybxx.generatedmessage","PCSMessage","server_client_one_request_result"),
-    SERVER_SERVER_FIRST_MESSAGE(20001,"com.wjybxx.generatedmessage","PSSMessage","server_server_first_message"),
-    SERVER_SERVER_PING(20002,"com.wjybxx.generatedmessage","PSSMessage","server_server_ping"),
+    SERVER_CLIENT_FIRST_MESSAGE(-916409472,"com.wjybxx.generatedmessage","PCSMessage","server_client_first_message"),
+    CLIENT_SERVER_PING(-757590406,"com.wjybxx.generatedmessage","PCSMessage","client_server_ping"),
+    SERVER_CLIENT_PONG(571393264,"com.wjybxx.generatedmessage","PCSMessage","server_client_pong"),
+    SERVER_CLIENT_ONE_REQUEST(508972478,"com.wjybxx.generatedmessage","PCSMessage","server_client_one_request"),
+    SERVER_CLIENT_ONE_REQUEST_RESULT(1917199806,"com.wjybxx.generatedmessage","PCSMessage","server_client_one_request_result"),
+    SERVER_SERVER_FIRST_MESSAGE(1181121784,"com.wjybxx.generatedmessage","PSSMessage","server_server_first_message"),
+    SERVER_SERVER_PING(-13509134,"com.wjybxx.generatedmessage","PSSMessage","server_server_ping"),
     ;
     /**
      * 消息id，必须唯一

@@ -1,6 +1,7 @@
 package com.wjybxx.protobuf;
 
 import com.google.protobuf.MessageLite;
+import io.netty.channel.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +12,7 @@ import java.util.Map;
  * 消息分发器，用于将消息分发到各个消息handler
  *
  * 要求所有的初始化工作都happens-before消息的处理工作，这是一种保证安全性的好方式
- * {@link #registerHandler(Class, MessageHandler)} happens-before {@link #onMessage(MessageLite)}
+ * {@link #registerHandler(Class, MessageHandler)} happens-before {@link #onMessage(Channel, MessageLite)}
  */
 public class MessageDispatcher {
 
@@ -34,9 +35,10 @@ public class MessageDispatcher {
 
     /**
      * 当收到一个消息
+     * @param channel
      * @param messageLite
      */
-    public void onMessage(MessageLite messageLite){
+    public void onMessage(Channel channel, MessageLite messageLite){
         try {
             @SuppressWarnings("unchecked")
             MessageHandler<MessageLite> messageHandler = (MessageHandler<MessageLite>) handlerMapping.get(messageLite.getClass());
@@ -44,7 +46,7 @@ public class MessageDispatcher {
                 logger.error("message handler is not registered, msgName={}",messageLite.getClass().getSimpleName());
                 return;
             }
-            messageHandler.onMessage(messageLite);
+            messageHandler.onMessage(channel, messageLite);
         } catch (Exception e) {
             logger.info("handle msg failed, msgName={}",messageLite.getClass().getSimpleName(),e);
         }

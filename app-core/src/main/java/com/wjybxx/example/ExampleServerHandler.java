@@ -21,7 +21,7 @@ public class ExampleServerHandler extends SimpleChannelInboundHandler<MessageLit
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageLite msg) throws Exception {
         // 将消息分发出去
-        messageDispatcher.onMessage(msg);
+        messageDispatcher.onMessage(ctx.channel(), msg);
     }
 
     @Override
