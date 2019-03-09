@@ -6,7 +6,6 @@ package com.wjybxx.protobuf;
 public enum  MessageEnum {
 
     //content
-
     ;
     /**
      * 消息id，必须唯一

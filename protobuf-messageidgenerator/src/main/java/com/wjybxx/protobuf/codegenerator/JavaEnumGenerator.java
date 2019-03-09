@@ -18,7 +18,7 @@ public class JavaEnumGenerator extends AbstractCodeGenerator {
 
     @Override
     protected String templateFileName(Properties properties) {
-        return "JavaEnumTemplate.txt";
+        return "JavaEnumTemplate.java";
     }
 
     @Override

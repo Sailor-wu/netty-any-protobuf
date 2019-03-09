@@ -14,9 +14,9 @@ public abstract class AbstractCodeGenerator implements CodeGenerator{
     public final void generateCode(Properties properties, MessageRepository messageRepository) throws IOException {
         ensureMessageIdAssigned(messageRepository);
 
-        String messageEnumPath=targetFileDir(properties) + File.separator + targetFileName(properties);
-        System.out.println("messageEnumPath="+messageEnumPath);
-        File file=new File(messageEnumPath);
+        String targetFilePath=targetFileDir(properties) + File.separator + targetFileName(properties);
+        System.out.println("targetFilePath="+targetFilePath);
+        File file=new File(targetFilePath);
         if (file.exists()){
             file.delete();
         }

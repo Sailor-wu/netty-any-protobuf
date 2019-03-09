@@ -7,6 +7,12 @@ import com.wjybxx.protobuf.generator.*;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ *
+ * 启动直接需要配置一下 generator.properties
+ * 配置自己需要的属性
+ *
+ */
 public class GeneratorStart {
 
     public static void main(String[] args) throws IOException {
@@ -24,10 +30,10 @@ public class GeneratorStart {
         messageIdGenerator.generateMessageId(properties,messageRepository);
 
         // 生成代码各端代码 (Java + TS)
-        System.out.println("\nstart generate java enum");
+        System.out.println("\nstart generate java enum.");
         new JavaEnumGenerator().generateCode(properties,messageRepository);
 
-        System.out.println("\nstart generate typescript enum");
+        System.out.println("\nstart generate typescript enum.");
         new TypeScriptEnumGenerator().generateCode(properties,messageRepository);
 
         System.out.println("\nsuccess.");

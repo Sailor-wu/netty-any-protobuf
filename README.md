@@ -26,9 +26,16 @@ netty支持任意多个protoBuf协议编解码方案，易实行。
 * 其他，暂未想到。应该也存在
 
 * 2019年3月8日20:25:48 版本，先实现了hash分配的方式。
+* 2019年3月9日15:27:48 版本，实现了文件顺序分配的方式。
 
 # 模块组织
 * app-core是核心包，是项目中其他模块依赖的对象。它持有messageId生成器生成的枚举类，并实现了编解码过程。并提供了一个example示例。
 * protobuf-generatedmessage 是存放protoBuf生成的java代码的。
 * protobuf-messageidgenerator 是工具module，遍历指定的proto文件，将文件内的message读取出来，并分配id，然后写入各自需要的文件中。
 (在这里app-core包中的MessageEnum枚举文件是工具根据模板文件为java端生成的枚举文件，需要其它语言的文件，可以自己实现，后期我会写一个TypeScript的类文件)
+
+# 食用方法
+* 需要先配置generator.properties文件。
+* 有resource下有两个模板类，分别用于生成新的Java和TypeScript文件。
+* 资源加载时优先在本地加载，其次在jar包目录环境下加载(本地文件可以覆盖jar包配置文件)。
+* 其它语言类似，根据实际情况写一个模板文件，然后替换指定部分内容即可。

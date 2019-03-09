@@ -1,0 +1,72 @@
+namespace wjybxx{
+
+    /**
+     * 字符串索引的对象
+     */
+    export interface IStringMap<V> {
+        [key:string]:V;
+    }
+
+    /**
+     * 数字索引的对象
+     */
+    export interface INumberMap<V> {
+        [key:number]:V;
+    }
+
+
+    /**
+     * ts的protoBuf文件有两个方法，用于编解码自身，大致这样
+     */
+    export interface IProtoMessage<T extends IProtoMessage<T>> {
+
+        decode(input:Uint8Array):T;
+
+        encode(message:T):Uint8Array;
+    }
+
+    /**
+     * 消息处理器
+     */
+    export interface IMessageHandler<T> {
+        /**
+         * 收到一个消息时
+         * @param msg
+         */
+        onMessage(msg:T):void;
+    }
+
+    /**
+     * 消息分发器
+     */
+    export class TSMessageDispatcher {
+
+        private readonly handlerMapping:INumberMap<IMessageHandler>={};
+
+        /**
+         * 注册消息处理器
+         * @see MessageEnum
+         * @param messageEnum 对象里面的常量属性
+         * @param handler
+         */
+        public registerHandler(messageEnum:MessageEnum,handler:IMessageHandler){
+            this.handlerMapping[messageEnum]=handler;
+        }
+
+        /**
+         * 收到服务器消息时进行分发
+         * @param messageId
+         * @param msg
+         */
+        public onMessage(messageId:number,msg:IProtoMessage):void{
+            let handler:IMessageHandler=this.handlerMapping[messageId];
+            if (handler){
+                handler.onMessage(msg);
+            } else {
+                // log
+            }
+        }
+
+    }
+
+}

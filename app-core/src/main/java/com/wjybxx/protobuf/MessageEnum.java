@@ -12,7 +12,6 @@ public enum  MessageEnum {
     SERVER_CLIENT_ONE_REQUEST_RESULT(10005,"com.wjybxx.generatedmessage","PCSMessage","server_client_one_request_result"),
     SERVER_SERVER_FIRST_MESSAGE(20001,"com.wjybxx.generatedmessage","PSSMessage","server_server_first_message"),
     SERVER_SERVER_PING(20002,"com.wjybxx.generatedmessage","PSSMessage","server_server_ping"),
-
     ;
     /**
      * 消息id，必须唯一
