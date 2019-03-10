@@ -26,16 +26,17 @@ public class GeneratorStart {
         // 这里使用自己需要的策略(模式)
         MessageIdGenerator messageIdGenerator = new HashMessageIdGenerator();
 //        messageIdGenerator = new SequenceMessageIdGenerator();
-        System.out.println("\nstart generateMessageId, strategy="+messageIdGenerator.getClass().getSimpleName());
+        System.out.println("start generateMessageId, strategy="+messageIdGenerator.getClass().getSimpleName());
         messageIdGenerator.generateMessageId(properties,messageRepository);
 
-        // 生成代码各端代码 (Java + TS)
-        System.out.println("\nstart generate java enum.");
+        // 生成代码各端代码 (Java)
+        System.out.println("start generate java enum.");
         new JavaEnumGenerator().generateCode(properties,messageRepository);
 
+        // TS
 //        System.out.println("\nstart generate typescript enum.");
 //        new TypeScriptEnumGenerator().generateCode(properties,messageRepository);
 
-        System.out.println("\nsuccess.");
+        System.out.println("success.");
     }
 }

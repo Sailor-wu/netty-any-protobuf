@@ -10,7 +10,7 @@ import java.util.Properties;
  *
  * 优点：不会出现messageId冲突，一定是不同的，也足够简单。messageId可以表示额外的信息。
  * 缺点：当要兼容老版本的程序时，只有在文件的末尾添加新message是安全的。
- *      在中间插入和删除消息带来的破坏性太大。不过要遵守这一条其实也挺容易的。
+ *      在中间插入和删除消息带来的破坏性太大。不过要遵守这一条其实算容易。
  */
 public class SequenceMessageIdGenerator implements MessageIdGenerator{
 

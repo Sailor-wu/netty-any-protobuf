@@ -12,6 +12,10 @@ public class ProtoFileInfo {
      */
     private final String fileName;
     /**
+     * 文件中定义的package
+     */
+    private final String packageName;
+    /**
      * java包名
      */
     private final String javaPackageName;
@@ -27,8 +31,9 @@ public class ProtoFileInfo {
      */
     private final List<MessageBean> messageBeanList;
 
-    public ProtoFileInfo(String fileName, String javaPackageName, String javaOuterClassName, List<MessageBean> messageBeanList) {
+    public ProtoFileInfo(String fileName, String packageName, String javaPackageName, String javaOuterClassName, List<MessageBean> messageBeanList) {
         this.fileName = fileName;
+        this.packageName = packageName;
         this.javaPackageName = javaPackageName;
         this.javaOuterClassName = javaOuterClassName;
         this.messageBeanList = Collections.unmodifiableList(messageBeanList);
@@ -36,6 +41,10 @@ public class ProtoFileInfo {
 
     public String getFileName() {
         return fileName;
+    }
+
+    public String getPackageName() {
+        return packageName;
     }
 
     public String getJavaPackageName() {

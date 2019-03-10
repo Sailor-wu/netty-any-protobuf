@@ -38,6 +38,7 @@ public class ProtoBufFileUtils {
         String fileAbsPath=protoBufDir+File.separator + fileName;
         try(BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(new FileInputStream(fileAbsPath)))){
             String line;
+            String packageName=null;
             String javaPackageName=null;
             String javaOuterClassName=null;
             // 估算最多消息数
@@ -45,14 +46,20 @@ public class ProtoBufFileUtils {
             while ((line=bufferedReader.readLine())!=null){
                 line=line.trim();
 
+                // package属性
+                if (null==packageName && line.startsWith(OptionNames.PACKAGE)){
+                    packageName=parsePackage(line);
+                    continue;
+                }
+
                 // java包名
-                if (line.contains(OptionNames.JAVA_PACKAGE)){
-                 javaPackageName= parseOptionValue(line);
+                if (null==javaPackageName && line.contains(OptionNames.JAVA_PACKAGE)){
+                    javaPackageName= parseOptionValue(line);
                     continue;
                 }
 
                 // java外部类名
-                if (line.contains(OptionNames.JAVA_OUTER_CLASSNAME)){
+                if (null==javaOuterClassName && line.contains(OptionNames.JAVA_OUTER_CLASSNAME)){
                     javaOuterClassName= parseOptionValue(line);
                     continue;
                 }
@@ -64,16 +71,25 @@ public class ProtoBufFileUtils {
                 }
             }
 
+            if (packageName==null){
+                throw new IllegalArgumentException("package property is missing.");
+            }
+
             if (javaPackageName==null){
-                throw new IllegalArgumentException("javaPackageName is missing.");
+                throw new IllegalArgumentException("javaPackageName property is missing.");
             }
             if (javaOuterClassName==null){
-                throw new IllegalArgumentException("javaOuterClassName is missing.");
+                throw new IllegalArgumentException("javaOuterClassName property is missing.");
             }
-            return new ProtoFileInfo(fileName,javaPackageName,javaOuterClassName, messageBeanList);
+            return new ProtoFileInfo(fileName, packageName, javaPackageName,javaOuterClassName, messageBeanList);
         }
     }
 
+
+    private static String parsePackage(String line){
+        // 遇见第一个空格或分号切割
+        return line.substring(OptionNames.PACKAGE.length()).trim().split("[ ;]",2)[0];
+    }
 
     /**
      * 解析option属性的值
