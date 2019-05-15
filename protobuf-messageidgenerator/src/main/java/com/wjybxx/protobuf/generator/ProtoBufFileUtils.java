@@ -2,6 +2,7 @@ package com.wjybxx.protobuf.generator;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -15,9 +16,25 @@ public class ProtoBufFileUtils {
      */
     public static MessageRepository findAllMessage(Properties properties) throws IOException {
         String protoBufDir = properties.getProperty("protoBufDir");
-        String[] protoFileNames=properties.getProperty("protoBufFiles").split(",");
+        // 指定导出的文件，如果指定了只导出哪些，就只导出哪些
+        String protoBufFiles = properties.getProperty("protoBufFiles");
+        List<String> needExportFiles;
+        if (null!=protoBufFiles){
+            needExportFiles= Arrays.asList(protoBufFiles.split(","));
+        }else {
+            // 否则导出该文件夹下全部
+            File dirFile = new File(protoBufDir);
+            File[] childFiles = dirFile.listFiles();
+            needExportFiles=new ArrayList<>(childFiles.length);
+            for (File file:childFiles){
+                if (file.getName().endsWith(".proto")){
+                    needExportFiles.add(file.getName());
+                }
+            }
+        }
+
         MessageRepository repository=new MessageRepository();
-        for (String fileName:protoFileNames){
+        for (String fileName:needExportFiles){
             // 额外的空格
             if (fileName.trim().equals("")){
                 continue;

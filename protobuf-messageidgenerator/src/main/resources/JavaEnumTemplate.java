@@ -3,7 +3,7 @@ package com.wjybxx.protobuf;
 /**
  * 消息枚举，自动生成的文件
  */
-public enum  MessageEnum {
+public enum MessageEnum {
 
     //content
     ;

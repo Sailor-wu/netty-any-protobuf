@@ -6,6 +6,7 @@ import com.wjybxx.protobuf.generator.ProtoFileInfo;
 import com.wjybxx.protobuf.generator.ResourceLoader;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 public abstract class AbstractCodeGenerator implements CodeGenerator{
@@ -28,8 +29,8 @@ public abstract class AbstractCodeGenerator implements CodeGenerator{
             throw new IOException("can't find " +templateFileName);
         }
 
-        BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(templateFileStream));
-        BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+        BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(templateFileStream, StandardCharsets.UTF_8));
+        BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8));
 
         try{
             doGenerate(bufferedReader,bufferedWriter,properties,messageRepository);
